@@ -4,3 +4,8 @@ export type Task = {
   description: string;
   completed: boolean;
 }
+
+export type CreateTaskDTO = {
+  title: string;
+  description: string;
+}

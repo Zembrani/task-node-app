@@ -1,9 +1,4 @@
-import { Task } from '../../domain/TaskDomain';
-
-export type CreateTaskDTO = {
-  title: string;
-  description: string;
-}
+import { CreateTaskDTO, Task } from '../../domain/TaskDomain';
 
 export interface ITaskService {
   getAll(): Promise<Task[]>;

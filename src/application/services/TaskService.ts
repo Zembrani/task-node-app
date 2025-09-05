@@ -1,6 +1,6 @@
 import { ITaskRepository } from '../repositories/ITaskRepository';
-import { CreateTaskDTO, ITaskService } from './ITaskService';
-import { Task } from '../../domain/TaskDomain';
+import { ITaskService } from './ITaskService';
+import { CreateTaskDTO, Task } from '../../domain/TaskDomain';
 
 export class TaskService implements ITaskService {
     constructor(private taskRepository: ITaskRepository) {}
@@ -22,7 +22,7 @@ export class TaskService implements ITaskService {
         return existingTask;
     }
 
-    async updateTask(id: Task['id'], task: Task): Promise<Task | null> {
+    async updateTask(id: Task['id'], task: Partial<Task>): Promise<Task | null> {
         const existingTask = await this.taskRepository.getTaskById(id);
 
         if(!existingTask) {
