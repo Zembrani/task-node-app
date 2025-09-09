@@ -9,3 +9,10 @@ export type CreateTaskDTO = {
   title: string;
   description: string;
 }
+
+export type ExternalTask = {
+  orderNumber: string;
+  name: string;
+  subject: string;
+  status: boolean;
+}
