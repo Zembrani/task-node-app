@@ -9,6 +9,15 @@ export class TaskAdapter implements ITaskRepository {
     private externalApi: ExternalAPIRepository
   ) {}
 
+  private toTask(externalTask: ExternalTask): Task {
+    return {
+      id: externalTask.orderNumber,
+      title: externalTask.name,
+      description: externalTask.subject,
+      completed: externalTask.status
+    }
+  }
+
   async getAll(): Promise<Task[]> {
     const externalTasks = await this.externalApi.getAll();
     return externalTasks.map((task) => {
@@ -44,12 +53,7 @@ export class TaskAdapter implements ITaskRepository {
       return undefined;
     }
 
-    const task: Task = {
-      id: externalTask.orderNumber,
-      title: externalTask.name,
-      description: externalTask.subject,
-      completed: externalTask.status
-    }
+    const task: Task = this.toTask(externalTask);
     return task;
   }
 
@@ -66,12 +70,7 @@ export class TaskAdapter implements ITaskRepository {
     if (!updatedExternalTask) {
       return null;
     }
-    const updatedTask: Task = {
-      id: updatedExternalTask.orderNumber,
-      title: updatedExternalTask.name,
-      description: updatedExternalTask.subject,
-      completed: updatedExternalTask.status,
-    };
+    const updatedTask: Task =  this.toTask(updatedExternalTask);
 
     return updatedTask;
   }
